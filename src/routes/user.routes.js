@@ -5,4 +5,6 @@ const router = new Router()
 
 router.post('/', UserController.create)
 
+router.post('/token', UserController.login)
+
 module.exports = router

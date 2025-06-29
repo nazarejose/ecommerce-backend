@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt')
 const { User } = require('../models') 
+const jwt = require('jsonwebtoken')
 
 class UserController {
   async create(req, res) {
@@ -30,6 +31,39 @@ class UserController {
     } catch (error) {
       console.error(error)
       return res.status(500).json({ error: 'Falha ao criar usuário.' })
+    }
+  }
+
+  async login(req, res) {
+    try {
+      const { email, password } = req.body
+
+      if (!email || !password) {
+        return res.status(400).json({ error: 'E-mail e senha são obrigatórios.' })
+      }
+
+      const user = await User.findOne({ where: { email } })
+      if (!user) {
+        return res.status(401).json({ error: 'Credenciais inválidas.' })
+      }
+
+      const isPasswordValid = await bcrypt.compare(password, user.password)
+      if (!isPasswordValid) {
+        return res.status(401).json({ error: 'Credenciais inválidas.' })
+      }
+
+      const payload = { id: user.id }
+      const token = jwt.sign(
+        payload,
+        process.env.JWT_SECRET, 
+        { expiresIn: '8h' }
+      )
+
+      return res.status(200).json({ token });
+
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Falha ao fazer login.' });
     }
   }
 }
