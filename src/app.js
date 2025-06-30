@@ -1,6 +1,7 @@
 require('dotenv/config')
 const express = require('express')
 const userRoutes = require('./routes/user.routes')
+const categoryRoutes = require('./routes/category.routes')
 
 const app = express()
 
@@ -11,5 +12,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/v1/user', userRoutes)
+
+app.use('/v1/category', categoryRoutes)
 
 module.exports = app
