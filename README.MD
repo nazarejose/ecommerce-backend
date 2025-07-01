@@ -126,3 +126,9 @@ Para testar a API, você pode usar os scripts SQL fornecidos durante o desenvolv
 * `POST /` - **[Protegido]** Cria um novo produto com suas categorias, imagens e opções.
 * `PUT /:id` - **[Protegido]** Atualiza um produto e seus dados associados.
 * `DELETE /:id` - **[Protegido]** Deleta um produto.
+
+
+## Conclusão
+
+Este projeto foi desenvolvido como parte da formação da **Geração Tech 2.0**, em parceria com a **Digital College**. Agradeço à instituição pelo suporte, conteúdo de qualidade e pela oportunidade de aprimorar meus conhecimentos em desenvolvimento back-end.
+
